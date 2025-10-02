@@ -15,11 +15,11 @@ class MpgTransaction
     var $mcpRateInfo = null;
     var $installmentInfo = null;
     var $anv = null;
-    private array $txn;
+    private Transaction|array $txn;
     private CofInfo|null $cof = null;
     private MpgAvsInfo|null $avs = null;
 
-    public function __construct(array $txn)
+    public function __construct(Transaction|array $txn)
     {
         $this->txn = $txn;
     }
@@ -130,7 +130,7 @@ class MpgTransaction
         $this->sessionAccountInfo = $sessionAccountInfo;
     }
 
-    public function getTransaction()
+    public function getTransaction(): Transaction|array
     {
         return $this->txn;
     }
