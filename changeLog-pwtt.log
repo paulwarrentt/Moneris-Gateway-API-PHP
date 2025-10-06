@@ -1,0 +1,8 @@
+Created to bring the Moneris code closer to PSR-4 standards. At the very least, to remove the many warnings during code checks when including Moneris Libraries.
+
+## Release Notes
+
+###### v1.0.0
+* New - Extracted each class from the mpgClasses.php file and gave them their own file.
+* Update - Updated the code to closer adhere to PSR-4 standards.
+* Update - Added return types to many methods but not all.
