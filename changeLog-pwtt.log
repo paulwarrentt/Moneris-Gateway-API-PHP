@@ -2,7 +2,10 @@ Created to bring the Moneris code closer to PSR-4 standards. At the very least, 
 
 ## Release Notes
 
-###### v1.0.0
+###### v1.0.1 - 2025-10-06
+* Update - Added ext-curl to the required extensions in composer.json.
+
+###### v1.0.0 - 2025-10-06
 * New - Extracted each class from the mpgClasses.php file and gave them their own file.
 * Update - Updated the code to closer adhere to PSR-4 standards.
 * Update - Added return types to many methods but not all.
