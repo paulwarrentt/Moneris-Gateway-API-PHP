@@ -26,7 +26,7 @@ class MpgHttpsPost
 
         $url = $this->mpgRequest->getURL();
 
-        $httpsPost = new HttpPost($url, $dataToSend);
+        $httpsPost = new HttpsPost($url, $dataToSend);
         $response = $httpsPost->getHttpsResponse();
 
         if ( ! $response) {

@@ -2,7 +2,7 @@
 
 namespace PaulWarrenTT\Moneris;
 
-class HttpPost
+class HttpsPost
 {
     private string $url;
     private mixed $dataToSend;
