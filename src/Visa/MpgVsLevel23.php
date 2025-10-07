@@ -2,8 +2,11 @@
 
 namespace PaulWarrenTT\Moneris\Visa;
 
+use PaulWarrenTT\Moneris\Traits\ToXML;
+
 class MpgVsLevel23
 {
+    use ToXML;
     private $template = [
         'corpai' => null,
         'corpas' => null,
@@ -43,34 +46,7 @@ class MpgVsLevel23
 
     public function toXML(): string
     {
-        $xmlString = $this->toXML_low($this->data, "0");
-
-        return $xmlString;
-    }
-
-    private function toXML_low($dataArray, $root): string
-    {
-        $xmlRoot = "";
-
-        foreach ($dataArray as $key => $value) {
-            if ( ! is_numeric($key) && $value != "" && $value != null) {
-                $xmlRoot .= "<$key>";
-            } elseif (is_numeric($key) && $key != "0") {
-                $xmlRoot .= "</$root><$root>";
-            }
-
-            if (is_array($value)) {
-                $xmlRoot .= $this->toXML_low($value, $key);
-            } else {
-                $xmlRoot .= $value;
-            }
-
-            if ( ! is_numeric($key) && $value != "" && $value != null) {
-                $xmlRoot .= "</$key>";
-            }
-        }
-
-        return $xmlRoot;
+        return $this->toXML_low($this->data, "0");
     }
 }//end class
 
