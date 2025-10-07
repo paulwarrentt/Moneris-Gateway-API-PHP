@@ -2,6 +2,9 @@ Created to bring the Moneris code closer to PSR-4 standards. At the very least, 
 
 ## Release Notes
 
+###### v1.0.4 - 2025-10-07
+* Fix - Error on MpgHttpsPost: $xmlString using ?string was not enough.
+
 ###### v1.0.3 - 2025-10-07
 * Fix - Error on MpgHttpsPost: $xmlString must not be accessed before initialization
 
