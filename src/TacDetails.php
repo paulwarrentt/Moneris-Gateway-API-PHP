@@ -5,10 +5,10 @@ namespace PaulWarrenTT\Moneris;
 class TacDetails
 {
     // Properties
-    public string $text;
-    public string $url;
-    public string $version;
-    public string $languageCode;
+    public ?string $text;
+    public ?string $url;
+    public ?string $version;
+    public ?string $languageCode;
 
     // Methods
 

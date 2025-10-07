@@ -9,7 +9,7 @@ class MpgHttpsPost
     private mixed $app_version;
     private MpgRequest $mpgRequest;
     private MpgResponse $mpgResponse;
-    private string $xmlString;
+    private ?string $xmlString;
 //    var $txnType;
     private bool $isMPI;
     private bool $isMPI2;
