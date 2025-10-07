@@ -2,8 +2,11 @@
 
 namespace PaulWarrenTT\Moneris;
 
+use PaulWarrenTT\Moneris\Traits\ToXML;
+
 class Transaction
 {
+    use ToXML;
     protected ?array $data;
     protected ?string $rootTag;
     protected bool $is3Dsecure2Transaction = false;
@@ -29,30 +32,5 @@ class Transaction
         $xmlString .= "</".$this->rootTag.">";
 
         return $xmlString;
-    }
-
-    private function toXML_low(array $dataArray, string $root): string
-    {
-        $xmlRoot = "";
-
-        foreach ($dataArray as $key => $value) {
-            if ( ! is_numeric($key) && $value != "" && $value != null) {
-                $xmlRoot .= "<$key>";
-            } elseif (is_numeric($key) && $key != "0") {
-                $xmlRoot .= "</$root><$root>";
-            }
-
-            if (is_array($value)) {
-                $xmlRoot .= $this->toXML_low($value, $key);
-            } else {
-                $xmlRoot .= $value;
-            }
-
-            if ( ! is_numeric($key) && $value != "" && $value != null) {
-                $xmlRoot .= "</$key>";
-            }
-        }
-
-        return $xmlRoot;
     }
 }

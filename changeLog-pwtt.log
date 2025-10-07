@@ -2,7 +2,9 @@ Created to bring the Moneris code closer to PSR-4 standards. At the very least, 
 
 ## Release Notes
 
-###### v1.0.2 - 2025-10-06
+###### v1.0.3 - 2025-10-07
+* Fix - Error on MpgRequest: $xmlString must not be accessed before initialization
+* Update - Moved toXML_low to reusable trait.
 * Update - Added Readme
 
 ###### v1.0.1 - 2025-10-06
