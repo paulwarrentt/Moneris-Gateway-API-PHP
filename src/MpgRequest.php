@@ -8,7 +8,7 @@ class MpgRequest
     private string $testMode = "";
     private string $isMPI = "";
     private bool $useEnhancedXML = false;
-    private string $xmlString;
+    private string $xmlString = "";
     private MpgTransaction|array $txnArray;
     private array $txnTypes = [
         //Basic

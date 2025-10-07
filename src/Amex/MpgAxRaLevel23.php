@@ -2,8 +2,11 @@
 
 namespace PaulWarrenTT\Moneris\Amex;
 
+use PaulWarrenTT\Moneris\Traits\ToXML;
+
 class MpgAxRaLevel23
 {
+    use ToXML;
     private $template = [
         'axralevel23' => [
             'airline_process_id' => null,
@@ -137,28 +140,4 @@ class MpgAxRaLevel23
         return $xmlString;
     }
 
-    private function toXML_low($dataArray, $root)
-    {
-        $xmlRoot = "";
-
-        foreach ($dataArray as $key => $value) {
-            if ( ! is_numeric($key) && $value != "" && $value != null) {
-                $xmlRoot .= "<$key>";
-            } elseif (is_numeric($key) && $key != "0") {
-                $xmlRoot .= "</$root><$root>";
-            }
-
-            if (is_array($value)) {
-                $xmlRoot .= $this->toXML_low($value, $key);
-            } else {
-                $xmlRoot .= $value;
-            }
-
-            if ( ! is_numeric($key) && $value != "" && $value != null) {
-                $xmlRoot .= "</$key>";
-            }
-        }
-
-        return $xmlRoot;
-    }
 }//end class

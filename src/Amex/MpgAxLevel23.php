@@ -2,8 +2,12 @@
 
 namespace PaulWarrenTT\Moneris\Amex;
 
+use PaulWarrenTT\Moneris\Traits\ToXML;
+
 class MpgAxLevel23
 {
+    use ToXML;
+
     private $template = [
         'axlevel23' => ['table1' => null, 'table2' => null, 'table3' => null],
     ];
@@ -41,31 +45,6 @@ class MpgAxLevel23
     public function toXML(): string
     {
         return $this->toXML_low($this->data, "axlevel23");
-    }
-
-    private function toXML_low($dataArray, $root): string
-    {
-        $xmlRoot = "";
-
-        foreach ($dataArray as $key => $value) {
-            if ( ! is_numeric($key) && $value != "" && $value != null) {
-                $xmlRoot .= "<$key>";
-            } elseif (is_numeric($key) && $key != "0") {
-                $xmlRoot .= "</$root><$root>";
-            }
-
-            if (is_array($value)) {
-                $xmlRoot .= $this->toXML_low($value, $key);
-            } else {
-                $xmlRoot .= $value;
-            }
-
-            if ( ! is_numeric($key) && $value != "" && $value != null) {
-                $xmlRoot .= "</$key>";
-            }
-        }
-
-        return $xmlRoot;
     }
 }
 

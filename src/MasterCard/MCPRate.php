@@ -2,8 +2,11 @@
 
 namespace PaulWarrenTT\Moneris\MasterCard;
 
+use PaulWarrenTT\Moneris\Traits\ToXML;
+
 class MCPRate
 {
+    use ToXML;
     private $template = [
         "merchant_settlement_amount" => null,
         "cardholder_amount" => null,
@@ -44,30 +47,5 @@ class MCPRate
 
         return $xmlString;
         //return "<rate>". $xmlString. "</rate>";
-    }
-
-    private function toXML_low($dataArray, $root)
-    {
-        $xmlRoot = "";
-
-        foreach ($dataArray as $key => $value) {
-            if ( ! is_numeric($key) && $value != "" && $value != null) {
-                $xmlRoot .= "<$key>";
-            } elseif (is_numeric($key) && $key != "0") {
-                $xmlRoot .= "</$root><$root>";
-            }
-
-            if (is_array($value)) {
-                $xmlRoot .= $this->toXML_low($value, $key);
-            } else {
-                $xmlRoot .= $value;
-            }
-
-            if ( ! is_numeric($key) && $value != "" && $value != null) {
-                $xmlRoot .= "</$key>";
-            }
-        }
-
-        return $xmlRoot;
     }
 }
