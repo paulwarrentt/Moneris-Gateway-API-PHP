@@ -5,7 +5,7 @@ namespace PaulWarrenTT\Moneris;
 class Tac
 {
     // Properties
-    public array $tacDetailsList;
+    public ?array $tacDetailsList;
 
     // Methods
     function getTacDetailsList(): array
