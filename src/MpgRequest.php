@@ -64,7 +64,7 @@ class MpgRequest
         'res_purchase_cc' => ['data_key', 'order_id', 'cust_id', 'amount', 'crypt_type', 'dynamic_descriptor', 'expdate', 'market_indicator', 'get_nt_response'],
         'res_temp_add' => ['pan', 'expdate', 'crypt_type', 'duration', 'data_key_format', 'anc1'],
         'res_temp_tokenize' => ['order_id', 'txn_number', 'duration', 'crypt_type'],
-        'res_tokenize_cc' => ['order_id', 'txn_number', 'cust_id', 'phone', 'email', 'note', 'data_key_format', 'return_issuer_id'],
+        'res_tokenize_cc' => ['order_id', 'txn_number', 'cust_id', 'phone', 'email', 'note', 'data_key_format'],
         'res_update_cc' => ['data_key', 'cust_id', 'phone', 'email', 'note', 'pan', 'expdate', 'crypt_type'],
         'res_forcepost_cc' => ['order_id', 'cust_id', 'amount', 'data_key', 'auth_code', 'crypt_type', 'dynamic_descriptor', 'get_nt_response'],
 
@@ -152,7 +152,7 @@ class MpgRequest
         'us_res_purchase_cc' => ['data_key', 'order_id', 'cust_id', 'amount', 'crypt_type', 'commcard_invoice', 'commcard_tax_amount', 'dynamic_descriptor'],
         'us_res_purchase_pinless' => ['data_key', 'order_id', 'cust_id', 'amount', 'intended_use', 'p_account_number'],
         'us_res_temp_add' => ['pan', 'expdate', 'duration', 'crypt_type', 'data_key_format'],
-        'us_res_tokenize_cc' => ['order_id', 'txn_number', 'cust_id', 'phone', 'email', 'note', 'data_key_format', 'return_issuer_id'],
+        'us_res_tokenize_cc' => ['order_id', 'txn_number', 'cust_id', 'phone', 'email', 'note', 'data_key_format'],
         'us_res_update_cc' => ['data_key', 'cust_id', 'phone', 'email', 'note', 'pan', 'expdate', 'crypt_type'],
         'us_res_update_ach' => ['data_key', 'cust_id', 'phone', 'email', 'note'],
         'us_res_update_pinless' => ['data_key', 'cust_id', 'phone', 'email', 'note', 'pan', 'expdate', 'presentation_type', 'p_account_number'],
@@ -257,6 +257,10 @@ class MpgRequest
         'installment_info' => ['plan_id', 'plan_id_ref', 'tac_version'],
         'installment_lookup' => ['order_id', 'amount', 'pan', 'expdate'],
         'res_installment_lookup' => ['order_id', 'amount', 'data_key', 'expdate'],
+
+        //Surcharge
+        'surcharge_lookup' => ['pan', 'amount'],
+        'res_surcharge_lookup' => ['data_key', 'amount'],
     ];
 
     public function __construct(MpgTransaction|array $txn)
@@ -463,6 +467,11 @@ class MpgRequest
                 $txnXMLString .= "<rate_info>".$mcpRateInfo->toXML()."</rate_info>";
             }
 
+            $surcharge = $txnObj->getSurchargeInfo();
+            if($surcharge != null)
+            {
+                $txnXMLString .= $surcharge->toXML();
+            }
             $txnXMLString .= "</$txnType>";
 
             //for risk transactions only

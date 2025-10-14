@@ -136,11 +136,13 @@ class MpgResponse
             $firstInstallment->setUpfrontFee($this->planDataHash[$planID]["FirstInstallment"]["UpfrontFee"]);
             $firstInstallment->setInstallmentFee($this->planDataHash[$planID]["FirstInstallment"]["InstallmentFee"]);
             $firstInstallment->setAmount($this->planDataHash[$planID]["FirstInstallment"]["Amount"]);
+            $firstInstallment->setTotalAmount($this->planDataHash[$planID]["FirstInstallment"]["TotalAmount"]);
             $installmentPlans[$pIndx]->setFirstInstallment($firstInstallment);
 
             $lastInstallment = new LastInstallment();
             $lastInstallment->setInstallmentFee($this->planDataHash[$planID]["LastInstallment"]["InstallmentFee"]);
             $lastInstallment->setAmount($this->planDataHash[$planID]["LastInstallment"]["Amount"]);
+            $lastInstallment->setTotalAmount($this->planDataHash[$planID]["LastInstallment"]["TotalAmount"]);
             $installmentPlans[$pIndx]->setLastInstallment($lastInstallment);
 
             $tacCount = count($this->tacHash[$planID]);
@@ -419,6 +421,24 @@ class MpgResponse
     public function getRecurEndDate()
     {
         return $this->getMpgResponseValue($this->responseData,'RecurEndDate');
+    }
+
+    //----------------------------Surcharge response fields ----------------------------//
+    public function getMaxSurchargeRate()
+    {
+        return $this->getMpgResponseValue($this->responseData,'MaxSurchargeRate');
+    }
+    public function getMaxSurchargeAmount()
+    {
+        return $this->getMpgResponseValue($this->responseData,'MaxSurchargeAmount');
+    }
+    public function getIsSurchargeEligible()
+    {
+        return $this->getMpgResponseValue($this->responseData,'IsSurchargeEligible');
+    }
+    public function getServiceType()
+    {
+        return $this->getMpgResponseValue($this->responseData,'ServiceType');
     }
 
     //--------------------------- MCP response fields ----------------------------//

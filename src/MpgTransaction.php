@@ -18,6 +18,7 @@ class MpgTransaction
     private Transaction|array $txn;
     private CofInfo|null $cof = null;
     private MpgAvsInfo|null $avs = null;
+    private SurchargeInfo|null $surchargeInfo = null;
 
     public function __construct(Transaction|array $txn)
     {
@@ -168,6 +169,15 @@ class MpgTransaction
     public function setExpiryDate($expdate)
     {
         $this->expdate = $expdate;
+    }
+
+    public function setSurchargeInfo($surchargeInfo): void
+    {
+        $this->surchargeInfo = $surchargeInfo;
+    }
+    public function getSurchargeInfo(): ?SurchargeInfo
+    {
+        return $this->surchargeInfo;
     }
 
 }

@@ -5,7 +5,7 @@ namespace PaulWarrenTT\Moneris\Installments;
 class LastInstallment
 {
     // Properties
-    public $installmentFee, $amount;
+    public $installmentFee, $amount, $totalAmount;
 
     // Methods
 
@@ -24,8 +24,18 @@ class LastInstallment
         $this->installmentFee = $installmentFee;
     }
 
+    function getTotalAmount()
+    {
+        return $this->totalAmount;
+    }
+
     function setAmount($amount)
     {
         $this->amount = $amount;
+    }
+
+    function setTotalAmount($totalAmount)
+    {
+        $this->totalAmount = $totalAmount;
     }
 }
