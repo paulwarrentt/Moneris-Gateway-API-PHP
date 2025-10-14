@@ -5,7 +5,7 @@ namespace PaulWarrenTT\Moneris\Installments;
 class FirstInstallment
 {
     // Properties
-    public $upfrontFee, $installmentFee, $amount;
+    public $upfrontFee, $installmentFee, $amount, $totalAmount;
 
     // Methods
     function getUpfrontFee() {
@@ -31,5 +31,13 @@ class FirstInstallment
 
     function setAmount($amount) {
         $this->amount = $amount;
+    }
+
+    function getTotalAmount() {
+        return  $this->totalAmount;
+    }
+    function setTotalAmount($totalAmount): void
+    {
+        $this->totalAmount = $totalAmount;
     }
 }
