@@ -2,6 +2,11 @@ Created to bring the Moneris code closer to PSR-4 standards. At the very least, 
 
 ## Release Notes
 
+###### v1.0.6 - 2026-10-16
+* Fix - MpgResponse, MpiResponse, RiskResponse: Replaced deprecated xml_set_object() and string handler names with method callables (PHP 8.4 deprecations).
+* Fix - MpgRequest: Added missing incremental_preauth transaction type, which threw a TypeError.
+* Update - MpgRequest: Added is_incremental to preauth, cavv_preauth, res_preauth_cc and res_cavv_preauth_cc. Ported from Moneris master.
+
 ###### v1.0.5 - 2025-10-14
 * Update - Master updated, imported to this repo.
 
