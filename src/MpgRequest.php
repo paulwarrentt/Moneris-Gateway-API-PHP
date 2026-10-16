@@ -14,7 +14,7 @@ class MpgRequest
         //Basic
         'batchclose' => ['ecr_number'],
         'card_verification' => ['order_id', 'cust_id', 'pan', 'expdate', 'crypt_type', 'tr_id', 'token_cryptogram'],
-        'cavv_preauth' => ['order_id', 'cust_id', 'amount', 'pan', 'expdate', 'cavv', 'crypt_type', 'dynamic_descriptor', 'wallet_indicator', 'cm_id', 'threeds_version', 'threeds_server_trans_id', 'final_auth', 'ds_trans_id', 'tr_id', 'token_cryptogram'],
+        'cavv_preauth' => ['order_id', 'cust_id', 'amount', 'pan', 'expdate', 'cavv', 'crypt_type', 'dynamic_descriptor', 'wallet_indicator', 'cm_id', 'threeds_version', 'threeds_server_trans_id', 'final_auth', 'ds_trans_id', 'tr_id', 'token_cryptogram', 'is_incremental'],
         'cavv_purchase' => ['order_id', 'cust_id', 'amount', 'pan', 'expdate', 'cavv', 'crypt_type', 'dynamic_descriptor', 'network', 'data_type', 'wallet_indicator', 'cm_id', 'threeds_version', 'threeds_server_trans_id', 'ds_trans_id', 'tr_id', 'token_cryptogram'],
         'completion' => ['order_id', 'comp_amount', 'txn_number', 'crypt_type', 'cust_id', 'dynamic_descriptor', 'ship_indicator'],
         'contactless_purchase' => ['order_id', 'cust_id', 'amount', 'track2', 'pan', 'expdate', 'pos_code', 'dynamic_descriptor'],
@@ -23,7 +23,7 @@ class MpgRequest
         'forcepost' => ['order_id', 'cust_id', 'amount', 'pan', 'expdate', 'auth_code', 'crypt_type', 'dynamic_descriptor'],
         'ind_refund' => ['order_id', 'cust_id', 'amount', 'pan', 'expdate', 'crypt_type', 'dynamic_descriptor'],
         'opentotals' => ['ecr_number'],
-        'preauth' => ['order_id', 'cust_id', 'amount', 'pan', 'expdate', 'crypt_type', 'dynamic_descriptor', 'wallet_indicator', 'market_indicator', 'cm_id', 'final_auth', 'tr_id', 'token_cryptogram'],
+        'preauth' => ['order_id', 'cust_id', 'amount', 'pan', 'expdate', 'crypt_type', 'dynamic_descriptor', 'wallet_indicator', 'market_indicator', 'cm_id', 'final_auth', 'tr_id', 'token_cryptogram', 'is_incremental'],
         'purchase' => ['order_id', 'cust_id', 'amount', 'pan', 'expdate', 'crypt_type', 'dynamic_descriptor', 'wallet_indicator', 'market_indicator', 'cm_id', 'tr_id', 'token_cryptogram'],
         'purchasecorrection' => ['order_id', 'txn_number', 'crypt_type', 'cust_id', 'dynamic_descriptor'],
         'reauth' => ['order_id', 'cust_id', 'amount', 'orig_order_id', 'txn_number', 'crypt_type', 'dynamic_descriptor'],
@@ -51,7 +51,7 @@ class MpgRequest
         'res_add_cc' => ['cust_id', 'phone', 'email', 'note', 'pan', 'expdate', 'crypt_type', 'data_key_format'],
         'res_add_token' => ['data_key', 'cust_id', 'phone', 'email', 'note', 'expdate', 'crypt_type', 'data_key_format'],
         'res_card_verification_cc' => ['data_key', 'order_id', 'crypt_type', 'expdate', 'get_nt_response'],
-        'res_cavv_preauth_cc' => ['data_key', 'order_id', 'cust_id', 'amount', 'cavv', 'crypt_type', 'dynamic_descriptor', 'expdate', 'threeds_version', 'threeds_server_trans_id', 'final_auth', 'ds_trans_id', 'get_nt_response'],
+        'res_cavv_preauth_cc' => ['data_key', 'order_id', 'cust_id', 'amount', 'cavv', 'crypt_type', 'dynamic_descriptor', 'expdate', 'threeds_version', 'threeds_server_trans_id', 'final_auth', 'ds_trans_id', 'get_nt_response', 'is_incremental'],
         'res_cavv_purchase_cc' => ['data_key', 'order_id', 'cust_id', 'amount', 'cavv', 'crypt_type', 'dynamic_descriptor', 'expdate', 'threeds_version', 'threeds_server_trans_id', 'final_auth', 'ds_trans_id', 'get_nt_response'],
         'res_delete' => ['data_key'],
         'res_get_expiring' => [],
@@ -60,7 +60,7 @@ class MpgRequest
         'res_lookup_full' => ['data_key'],
         'res_lookup_masked' => ['data_key'],
         'res_mpitxn' => ['data_key', 'xid', 'amount', 'MD', 'merchantUrl', 'accept', 'userAgent', 'expdate'],
-        'res_preauth_cc' => ['data_key', 'order_id', 'cust_id', 'amount', 'crypt_type', 'dynamic_descriptor', 'expdate', 'market_indicator', 'final_auth', 'get_nt_response'],
+        'res_preauth_cc' => ['data_key', 'order_id', 'cust_id', 'amount', 'crypt_type', 'dynamic_descriptor', 'expdate', 'market_indicator', 'final_auth', 'get_nt_response', 'is_incremental'],
         'res_purchase_cc' => ['data_key', 'order_id', 'cust_id', 'amount', 'crypt_type', 'dynamic_descriptor', 'expdate', 'market_indicator', 'get_nt_response'],
         'res_temp_add' => ['pan', 'expdate', 'crypt_type', 'duration', 'data_key_format', 'anc1'],
         'res_temp_tokenize' => ['order_id', 'txn_number', 'duration', 'crypt_type'],
@@ -261,6 +261,9 @@ class MpgRequest
         //Surcharge
         'surcharge_lookup' => ['pan', 'amount'],
         'res_surcharge_lookup' => ['data_key', 'amount'],
+
+        //Incremental Auth
+        'incremental_preauth' => ['order_id', 'txn_number', 'amount'],
     ];
 
     public function __construct(MpgTransaction|array $txn)
