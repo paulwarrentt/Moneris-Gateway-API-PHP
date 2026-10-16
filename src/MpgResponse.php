@@ -86,9 +86,8 @@ class MpgResponse
         $this->XMLParser = xml_parser_create();
         xml_parser_set_option($this->XMLParser, XML_OPTION_CASE_FOLDING, 0);
         xml_parser_set_option($this->XMLParser, XML_OPTION_TARGET_ENCODING, "UTF-8");
-        xml_set_object($this->XMLParser, $this);
-        xml_set_element_handler($this->XMLParser, "startHandler", "endHandler");
-        xml_set_character_data_handler($this->XMLParser, "characterHandler");
+        xml_set_element_handler($this->XMLParser, [$this, "startHandler"], [$this, "endHandler"]);
+        xml_set_character_data_handler($this->XMLParser, [$this, "characterHandler"]);
         xml_parse($this->XMLParser, $xmlString);
         xml_parser_free($this->XMLParser);
     }    //end of constructor
